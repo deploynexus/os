@@ -7,3 +7,5 @@ The OS creator requires QEMU.
 ## usage
 not done yet :( \
 will be ready soon tho
+
+t
