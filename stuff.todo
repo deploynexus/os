@@ -1,0 +1,13 @@
+TODO:
+    - build 3 qemu emulators -- linux, macos, and windows
+        - these will build qemu for those oses
+        - NO, actually, we're going to use github actions and one linux and one macos runner
+            - the macos runner will build for macos
+            - the linux runner will cross build for win32
+            - the linux runner will ALSO
+    - build a nixos vm
+    - make the custom qemu build portable, along with the nixos vm
+    - add a frontend
+    - make it do like, yknow. the Function . its Purpose. (the os building bit)
+    - ci/cd etc
+    - that should be it :3
