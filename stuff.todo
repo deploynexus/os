@@ -1,3 +1,17 @@
+This file is a super duper informal place for me to jot down ideas about this piece of the project.
+Don't expect anything in this file to be an accurate representation of the state of the project.
+It's like a sketchpad.
+
+
+
+PURPOSE:
+to allow nexus users to generate a custom version of the nexus operating system.
+
+how?????:
+ima emulate nixos somehow, thennnn run nixos-generators in that, after passing all the config the user did to nixos-generators.
+
+
+
 TODO:
     - build 3 qemu emulators -- linux, macos, and windows
         - these will build qemu for those oses
@@ -11,3 +25,56 @@ TODO:
     - make it do like, yknow. the Function . its Purpose. (the os building bit)
     - ci/cd etc
     - that should be it :3
+
+naaaah:
+
+so we're gonnna have the qemux/qemu docker container, and pass -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" to docker run
+                                                                        ^
+                                                                        note to change this as nixos updates
+
+it normally uses kvm acceleration, so on linux we also pass --device=/dev/kvm to docker run
+
+if we DONT want acceleration, we use -e "KVM=N" to docker run
+
+i want to figure out accel on windows and macos, windows hypervisor is haxm and macos hypervisor is hvf
+
+this is the docker command (for linux with kvm):
+
+docker run -it --rm --name qemu -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -p 8006:8006 --device=/dev/kvm --cap-add NET_ADMIN qemux/qemu-docker
+
+or for linux without kvm:
+
+docker run -it --rm --name qemu -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -e "KVM=N" -p 8006:8006 --cap-add NET_ADMIN qemux/qemu-docker
+
+
+so, there's a lot of good information on https://github.com/qemus/qemu-docker (it's the repo of this docker container)
+
+it has some faqs, and we should take a look at them:
+- cpu and ram can be modified
+- disk size can be modified
+- disk location can be modified (albeit probably not necessary)
+
+WE CAN ALSO CONNECT VIA WEB WITH NOVNC ON PORT 8006, ITLL SHOW WHAT THE MONITOR WOULD LOOK LIKE IF THIS WAS A REAL COMPUTER WITH A MONITOR AND ALL THAT> :D
+
+MAKE SURE TO RUN THE COMMAND AS ROOT VIA SUDO OOOOOOOOR ADD YOUR USER TO THE DOCKER GROUP
+
+i wanna be the guy!! i wanna be the gdash!!!! Geometry Dash Platformer Level
+
+so the idea of this is to generate a gdash platformer level in the style of Robert Topala Demon Grandpa Demon Tartarus Demon Demon Demon Geometry Dash Level. Demon. demond daemon
+
+OKAY: SO!
+running nixos in the container WORKS!
+what im gonna do is, run a server locally on the middleware, and then nixos will be set up to ping that yeah?
+and that'll return a script that nixos will run
+that script will contain everything nixos needs to do to build the os
+Very Cool! adskghsbeg👍
+
+sooo, to do THIS ^^^ (the text under OKAY: SO!), i will need to set up something to run on boot.
+HOWEVER, nixos generators does not necessarily *need* to be using the same version as the generating os...
+nixos generators takes the os version from system.stateVersion in the conf.nix passed to it, therefore we can just...Update it whenever there's a new version.
+and we can leave the os generator on 23.11, it wont matter!!!
+therefore, i can quickly make one custom builder iso right now, and itll all Just Work... just gotta get that setup
+so, with this logic, i can EASILY just add a service in the builder iso conf.nix, and i wont need to update it every time we update the target os version...
+
+SO, that means, we can just add a systemd service that runs at startup for the builder iso. itll ping the middleware, and run the script.
+refer to systems/pix/conf.nix in the proof of concept for an example service
