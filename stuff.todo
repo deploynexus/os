@@ -40,11 +40,11 @@ i want to figure out accel on windows and macos, windows hypervisor is haxm and 
 
 this is the docker command (for linux with kvm):
 
-docker run -it --rm --name qemu -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -p 8006:8006 --device=/dev/kvm --cap-add NET_ADMIN qemux/qemu-docker
+sudo docker run -it --rm --name qemu -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -p 8006:8006 --device=/dev/kvm --cap-add NET_ADMIN qemux/qemu-docker
 
 or for linux without kvm:
 
-docker run -it --rm --name qemu -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -e "KVM=N" -p 8006:8006 --cap-add NET_ADMIN qemux/qemu-docker
+sudo docker run -it --rm --name qemu -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -e "KVM=N" -p 8006:8006 --cap-add NET_ADMIN qemux/qemu-docker
 
 
 so, there's a lot of good information on https://github.com/qemus/qemu-docker (it's the repo of this docker container)
@@ -78,3 +78,32 @@ so, with this logic, i can EASILY just add a service in the builder iso conf.nix
 
 SO, that means, we can just add a systemd service that runs at startup for the builder iso. itll ping the middleware, and run the script.
 refer to systems/pix/conf.nix in the proof of concept for an example service
+
+
+
+OKAY!!!! we can ssh into nixos via:
+
+1. attach some port to port 22. for example, -p 2022:22 so localhost:2022 connects to vm:22
+2. set password for nixos user in vm (use passwd command)
+3. ssh nixos@localhost -p 2022
+
+
+we can transfer data using this method:
+
+1. we have a file on the nixos machine
+2. we ssh into the nixos machine
+3. we use inotifywait on the nixos machine AND the sshed machine to watch for changes to that file
+4. when one computer changes a file, it will do nothing in response to inotifywait. the other computer will take notice however
+4. the file will contain a script that can be executed by the computer taking notice of the inotifywait alert.
+5. once it's done executing, it'll update the file with a script containing what the OTHER computer should do
+6. the other computer will now do this
+7. these will bounce back and forth between computers, each one doing the other operation until the world caves in by matt maltese cover by sarah cothran and wuki
+
+
+here's a script we can use to check for updating a file:
+#!/bin/sh
+while inotifywait -e modify ~/Documents/os/wksp/valued_customer.txt; do
+  echo "we DIDS it!!!"
+done
+
+also, we need to DOCUMENT STUFF!!! explain how to rebuild the vm (./builder is where to store this docs), the docs at https://github.com/nix-community/nixos-generators are helpful
