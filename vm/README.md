@@ -36,11 +36,11 @@ To build the VM, follow these steps:
    ```bash
    cd /
    nix-shell -p nixos-generators --run "nixos-generate -c configuration.nix -f iso -I nixpkgs=channel:nixos-23.11 -o /nexus"
-   mv /nexus/iso/*.iso /nexus/iso/vm.iso
    ```
 5. On the host machine, open another terminal at the root of this repository (or use the previous one if it's still open) and run the following to download the VM from the container and kill it:
    ```bash
-   scp -P 2022 root@localhost:/nexus/iso/vm.iso ./vm/vm.iso
+   scp -P 2022 root@localhost:/nexus/iso/*.iso ./vm/vm.iso
+   chmod +w ./vm/vm.iso
    sudo docker stop qemu
    sudo docker rm qemu
    ```
