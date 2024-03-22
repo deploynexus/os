@@ -9,6 +9,9 @@
     # shouldn't need all of these, but they might be useful
     environment.systemPackages = with pkgs; [ neofetch curl inotify-tools nettools coreutils htop gnutar gzip nixos-generators ];
 
+    # allow building for arm
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     # daemon that listens for instructions from the host, and runs them
     systemd.services.nxsbstpd = {
         description = "Nexus Bootstrapper";
@@ -25,7 +28,7 @@
                     # begin waiting for updates
                     echo "Waiting for instructions..."
                     while inotifywait -e modify /nexus_bootstrap/pipe_in; do
-                        bash /nexus_bootstrap/pipe
+                        bash /nexus_bootstrap/pipe_in
                     done
                 '';
             in "${script}";
