@@ -15,13 +15,14 @@ When the user is ready to build an ISO, build instructions and necessary informa
 ## building the vm
 The NixOS installer images provided by the NixOS maintainers do not contain enough tooling to support this process automatically. Therefore, we must use `nixos-generators` to create an ISO of the builder VM. The ISO is based on the `configuration.nix` file located beside this README. It includes all the tooling necessary for the VM.
 
+> [!IMPORTANT]
+> Building the VM requires KVM, 4 CPU cores, 16GB of ram, and 128GB of disk space by default. In many cases, the VM doesn't need this much and you can lower these to something you can handle.
+
 To build the VM, follow these steps:
 1. Spawn a NixOS 23.11 Docker container with the following command:
    ```bash
    sudo docker run -it --rm --name qemu --cpus=4 --memory=16GB -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -e "CPU_CORES=4" -e "RAM_SIZE=16GB" -e "DISK_SIZE=128GB" -p 8006:8006 -p 2022:22 --device=/dev/kvm --cap-add NET_ADMIN qemux/qemu-docker
    ```
-> [!IMPORTANT]
-> This requires KVM, 4 CPU cores, 16GB of ram, and 128GB of disk space. It's unlikely that all of this is necessary for your build, so you may lower these requirements to something your system can handle.
 2. Open [localhost:8006](https://localhost:8006) in your browser. This is a VNC connection to the container. You'll need to add a password to the container to be able to connect to it via SSH, so run the `passwd` command in the container.
 3. SSH into [nixos@localhost:2022](ssh://nixos@localhost:2022), and copy the `configuration.nix` file beside this README to `/nb/conf.nix` on the container.
 4. Run the following command to build the VM:
