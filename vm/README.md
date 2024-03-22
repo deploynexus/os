@@ -19,20 +19,29 @@ The NixOS installer images provided by the NixOS maintainers do not contain enou
 > Building the VM requires KVM, 4 CPU cores, 16GB of ram, and 128GB of disk space by default. In many cases, the VM doesn't need this much and you can lower these to something you can handle.
 
 To build the VM, follow these steps:
-1. Spawn a NixOS 23.11 Docker container with the following command:
+1. Spawn a NixOS 23.11 Docker container using the following command:
    ```bash
    sudo docker run -it --rm --name qemu --cpus=4 --memory=16GB -e "BOOT=https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso" -e "CPU_CORES=4" -e "RAM_SIZE=16GB" -e "DISK_SIZE=128GB" -p 8006:8006 -p 2022:22 --device=/dev/kvm --cap-add NET_ADMIN qemux/qemu-docker
    ```
-2. Open [localhost:8006](https://localhost:8006) in your browser. This is a VNC connection to the container. You'll need to add a password to the container to be able to connect to it via SSH, so run the `passwd` command in the container.
-3. SSH into [nixos@localhost:2022](ssh://nixos@localhost:2022), and copy the `configuration.nix` file beside this README to `/nb/conf.nix` on the container.
-4. Run the following command to build the VM:
+2. Open [localhost:8006](https://localhost:8006) in your browser. You should now be connected to the container using VNC. You'll need to add a password to the root account to be able to connect to it via SSH, so run the following commands in the VNC window:
    ```bash
-   nix-shell -p nixos-generators --run "nixos-generate -c /nb/conf.nix -f iso -I nixpkgs=channel:nixos-23.11 -o /nb/result"
+   sudo -i
+   passwd
    ```
-5. Copy the ISO from the `/nb/result` directory to the host machine.
-6. Open a terminal on the host machine, and run the following commands to kill and delete the container:
+3. On the host machine, open a terminal at the root of this repository and run the following to copy the VM's configuration file to the container:
    ```bash
+   scp -P 2022 ./vm/configuration.nix root@localhost:/
+   ```
+4. SSH into [root@localhost:2022](ssh://root@localhost:2022) and run the following commands in the container to build the VM:
+   ```bash
+   cd /
+   nix-shell -p nixos-generators --run "nixos-generate -c configuration.nix -f iso -I nixpkgs=channel:nixos-23.11 -o /nexus"
+   mv /nexus/iso/*.iso /nexus/iso/vm.iso
+   ```
+5. On the host machine, open another terminal at the root of this repository (or use the previous one if it's still open) and run the following to download the VM from the container and kill it:
+   ```bash
+   scp -P 2022 root@localhost:/nexus/iso/vm.iso ./vm/vm.iso
    sudo docker stop qemu
    sudo docker rm qemu
    ```
-You've now successfully built the VM!
+You've now successfully built the VM! You can find it beside this README as `vm.iso`.
