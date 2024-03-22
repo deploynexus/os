@@ -1,25 +1,4 @@
 {
   "lockfile_version": "1",
-  "packages": {
-    "qemu@8.2.1": {
-      "last_modified": "2024-01-31T06:48:05Z",
-      "resolved": "github:NixOS/nixpkgs/5ad9903c16126a7d949101687af0aa589b1d7d3d#qemu",
-      "source": "devbox-search",
-      "version": "8.2.1",
-      "systems": {
-        "aarch64-darwin": {
-          "store_path": "/nix/store/x2bd1q92xrx5i0y1dc9rnjq07a7zkbik-qemu-8.2.1"
-        },
-        "aarch64-linux": {
-          "store_path": "/nix/store/hzh9xnkjw27v88gp2d05cbnm60npln2p-qemu-8.2.1"
-        },
-        "x86_64-darwin": {
-          "store_path": "/nix/store/p85jhsm5f8w9kwmfg52fwhji27n7yx26-qemu-8.2.1"
-        },
-        "x86_64-linux": {
-          "store_path": "/nix/store/y8v6f0ldkvlr8yp49z31dhwmrahj93sp-qemu-8.2.1"
-        }
-      }
-    }
-  }
+  "packages": {}
 }

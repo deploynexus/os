@@ -1,5 +1,7 @@
 {
-  "packages": ["qemu@8.2.1"],
+  "packages": [
+
+  ],
   "shell": {
     "init_hook": [
       "echo 'Welcome to devbox!' > /dev/null"
