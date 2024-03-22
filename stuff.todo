@@ -1,4 +1,4 @@
-This file is a super duper informal place for me to jot down ideas about this piece of the project.
+This file is a super duper informal place for me to jot down ideas.
 Don't expect anything in this file to be an accurate representation of the state of the project.
 It's like a sketchpad.
 
@@ -49,7 +49,7 @@ sudo docker run -it --rm --name qemu -e "BOOT=https://channels.nixos.org/nixos-2
 
 so, there's a lot of good information on https://github.com/qemus/qemu-docker (it's the repo of this docker container)
 
-it has some faqs, and we should take a look at them:
+it has some FRAPS Screen Recorder ,,Unlicensed hypercam 2, and we should take a look at them:
 - cpu and ram can be modified
 - disk size can be modified
 - disk location can be modified (albeit probably not necessary)
