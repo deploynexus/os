@@ -2,8 +2,8 @@
   "lockfile_version": "1",
   "packages": {
     "bash@5.2": {
-      "last_modified": "2024-03-23T22:08:43Z",
-      "resolved": "github:NixOS/nixpkgs/e1d501922fd7351da4200e1275dfcf5faaad1220#bash",
+      "last_modified": "2024-03-29T03:06:03Z",
+      "resolved": "github:NixOS/nixpkgs/9b09bde6e3fc9493b6a8b2a5702ac87c66505c64#bash",
       "source": "devbox-search",
       "version": "5.2p26",
       "systems": {
@@ -76,8 +76,8 @@
       }
     },
     "curl@8.6.0": {
-      "last_modified": "2024-03-23T22:08:43Z",
-      "resolved": "github:NixOS/nixpkgs/e1d501922fd7351da4200e1275dfcf5faaad1220#curl",
+      "last_modified": "2024-03-29T12:35:36Z",
+      "resolved": "github:NixOS/nixpkgs/807c549feabce7eddbf259dbdcec9e0600a0660d#curl",
       "source": "devbox-search",
       "version": "8.6.0",
       "systems": {
@@ -116,22 +116,22 @@
       }
     },
     "flutter@3.19.0": {
-      "last_modified": "2024-03-22T11:26:23Z",
-      "resolved": "github:NixOS/nixpkgs/a3ed7406349a9335cb4c2a71369b697cecd9d351#flutter",
+      "last_modified": "2024-03-25T12:46:37Z",
+      "resolved": "github:NixOS/nixpkgs/c726225724e681b3626acc941c6f95d2b0602087#flutter",
       "source": "devbox-search",
       "version": "3.19.0-sdk-links",
       "systems": {
         "aarch64-darwin": {
-          "store_path": "/nix/store/pnhflqfc4vixk4pkmbcjm0x073v9qjc6-flutter-wrapped-3.19.0-sdk-links"
+          "store_path": "/nix/store/nmxjarw7ia56gb42zwgjd4y5485ja097-flutter-wrapped-3.19.0-sdk-links"
         },
         "aarch64-linux": {
-          "store_path": "/nix/store/wc1bpzz36jd4hk9c1xfgvarfslmn8k80-flutter-wrapped-3.19.0-sdk-links"
+          "store_path": "/nix/store/hvn51hw7s78askp4q37i6hm8sk31kx1z-flutter-wrapped-3.19.0-sdk-links"
         },
         "x86_64-darwin": {
-          "store_path": "/nix/store/1dfpzyi99g5qg2inc3n5x4yi2n1rh4r0-flutter-wrapped-3.19.0-sdk-links"
+          "store_path": "/nix/store/fn9pkc7w9ckcb5ayr47993k1sr91hp7d-flutter-wrapped-3.19.0-sdk-links"
         },
         "x86_64-linux": {
-          "store_path": "/nix/store/k36781zx729v75cqb7ffsb7895ckbn5f-flutter-wrapped-3.19.0-sdk-links"
+          "store_path": "/nix/store/wkaqj97xj7glb0a0za3iplwcj95jm6mj-flutter-wrapped-3.19.0-sdk-links"
         }
       }
     },
@@ -168,8 +168,8 @@
       }
     },
     "mesa@24.0.3": {
-      "last_modified": "2024-03-23T22:08:43Z",
-      "resolved": "github:NixOS/nixpkgs/e1d501922fd7351da4200e1275dfcf5faaad1220#mesa",
+      "last_modified": "2024-03-29T12:35:36Z",
+      "resolved": "github:NixOS/nixpkgs/807c549feabce7eddbf259dbdcec9e0600a0660d#mesa",
       "source": "devbox-search",
       "version": "24.0.3",
       "systems": {
