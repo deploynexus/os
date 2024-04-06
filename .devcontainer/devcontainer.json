@@ -4,9 +4,6 @@
 	// i like using features inste
 	"features": {
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
-		"ghcr.io/jarrodcolburn/features/flutter-sdk:0": {
-			"release": "3.19.0"
-		},
 		"ghcr.io/devcontainers/features/git-lfs:1": {
 			"autoPull": true
 		},
