@@ -1,25 +1,7 @@
 {
-	"name": "Ubuntu",
-	"image": "mcr.microsoft.com/devcontainers/base:jammy",
-	// i like using features inste
-	"features": {
-		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
-		// "ghcr.io/devcontainers/features/git-lfs:1": {
-		// 	"autoPull": true
-		// },
-		// "ghcr.io/devcontainers-contrib/features/neofetch:1": {},
-		// "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-		// 	"packages": "curl git unzip xz-utils zip libglu1-mesa clang cmake git ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev"
-		// }
-		"ghcr.io/devcontainers/features/java:1": {}
-	}
-
-	// "forwardPorts": [],
-
-	// "postCreateCommand": "uname -a",
-
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+    "name": "Ubuntu",
+    "image": "mcr.microsoft.com/devcontainers/base:jammy",
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {}
+    }
 }
