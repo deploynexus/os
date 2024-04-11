@@ -1,21 +1,6 @@
 {
   "packages": [
-    "libstdcxx5@3.3.6",
-    "ninja@1.11.1",
-    "pkg-config@0.29.2",
-    "lzma@5.4.1",
-    "clang@17.0.6",
-    "cmake@3.28.3",
-    "mesa@24.0.3",
-    "xz@5.4.4",
-    "unzip@6.0",
-    "curl@8.6.0",
-    "which@2.21",
-    "coreutils@9.4",
-    "file@5.45",
-    "bash@5.2",
-    "flutter@3.19.0",
-    "gtk3.dev"
+    
   ],
   "shell": {
     "init_hook": [
